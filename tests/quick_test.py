@@ -28,14 +28,21 @@ def main() -> None:
     dataset = module.WindowIndexDataset(scaled, sample.inclination_deg.to_numpy(np.float32), labels, 5, 2)
     x, _ = dataset[0]
 
-    model = module.RecurrentRegressor("lstm", len(feature_cols), hidden_size=8, layers=1, dropout=0.0)
+    model = module.QwenLSTMRegressor(
+        num_features=len(feature_cols),
+        text_hidden_size=4096,
+        text_dim=8,
+        hidden_size=8,
+        layers=1,
+        dropout=0.0,
+    )
+    mock_qwen_embedding = torch.zeros((1, 4096), dtype=torch.float32)
     with torch.no_grad():
-        prediction = model(x.unsqueeze(0))
+        prediction = model(x.unsqueeze(0), mock_qwen_embedding)
     assert prediction.shape == (1,)
     assert torch.isfinite(prediction).all()
-    print("Quick test passed: sample loading, 21-feature windowing, scaling, and LSTM forward pass.")
+    print("Quick test passed: sample loading, 21-feature windowing, Qwen-LSTM fusion, and forward pass.")
 
 
 if __name__ == "__main__":
     main()
-

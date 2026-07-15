@@ -4,19 +4,18 @@ Official research code for **“Qwen-LSTM: Fusing Geological Semantics from a Fi
 
 Public repository: https://github.com/yanxiaoxiang123/Qwen-LSTM-Drilling-Trajectory
 
-The repository implements depth-forward online prediction of well inclination and azimuth by combining a frozen Qwen3.5-9B geological text encoder with an LSTM temporal encoder. It also contains the RNN, GRU, LSTM, Transformer, iTransformer, Qwen-iTransformer, and ablation configurations used in the manuscript.
+The repository implements depth-forward online prediction of well inclination and azimuth by combining a frozen, domain-fine-tuned Qwen3.5-9B geological text encoder with an LSTM temporal encoder. This public release intentionally exposes one supported model path: **Qwen-LSTM**.
 
 ## Repository layout
 
 ```text
 src/
-  train_online_rolling_h5.py   Main models, online training and evaluation
+  train_online_rolling_h5.py   Qwen-LSTM, online training and evaluation
   build_depth_level_dataset.py 1-ft depth-grid aggregation
   cross_well_infer.py          Cross-well inference
-scripts/                       Experiment launch and summary scripts
 examples/data/                 Small deidentified example data
-tests/quick_test.py            CPU-only functional quick test
-legacy/                        Earlier baseline and development scripts
+examples/run_qwen_lstm.sh      One-command Qwen-LSTM experiment
+tests/quick_test.py            CPU-only Qwen-LSTM functional quick test
 ```
 
 ## Installation
@@ -40,7 +39,7 @@ python tests/quick_test.py
 Expected output:
 
 ```text
-Quick test passed: sample loading, 21-feature windowing, scaling, and LSTM forward pass.
+Quick test passed: sample loading, 21-feature windowing, Qwen-LSTM fusion, and forward pass.
 ```
 
 The files under `examples/data/` are synthetic and deidentified. They preserve the 21-feature schema used by the paper but contain no original well measurements or identifying metadata.
@@ -87,9 +86,17 @@ export QWEN_ORIGINAL_DIR=/path/to/Qwen3.5-9B
 export QWEN_FINETUNED_DIR=/path/to/qwen3_5_9b_drilling_merged
 ```
 
-Model weights are not distributed in this repository. The released trajectory code consumes either the original or merged local checkpoint through `--qwen-model-dir`.
+Model weights are not distributed in this repository. The supported Qwen-LSTM path consumes the merged, domain-fine-tuned local checkpoint through `--qwen-model-dir`.
 
 ## Run one experiment
+
+After preparing the data and setting `QWEN_FINETUNED_DIR`, run:
+
+```bash
+bash examples/run_qwen_lstm.sh
+```
+
+The equivalent complete command is:
 
 ```bash
 python src/train_online_rolling_h5.py \

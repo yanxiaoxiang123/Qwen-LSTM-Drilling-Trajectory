@@ -18,4 +18,4 @@
 
 **Source repository:** https://github.com/yanxiaoxiang123/Qwen-LSTM-Drilling-Trajectory
 
-The repository permits anonymous download and contains individual source files, documentation, a deidentified example dataset, and a CPU quick test. Model weights and full well datasets are not redistributed.
+The repository permits anonymous download and contains the Qwen-LSTM source code, documentation, a deidentified example dataset, and a CPU Qwen-LSTM fusion quick test. Model weights and full well datasets are not redistributed.

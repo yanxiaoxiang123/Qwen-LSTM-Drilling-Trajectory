@@ -1152,16 +1152,12 @@ def train(args: argparse.Namespace) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Strict online rolling h-step drilling trajectory prediction.")
+    parser = argparse.ArgumentParser(description="Qwen-LSTM online rolling h-step drilling trajectory prediction.")
     parser.add_argument("--run-name", required=True)
     parser.add_argument("--runs-dir", default="runs_online_16A")
     parser.add_argument("--well", default="16A")
     parser.add_argument("--target", choices=["inclination_deg", "azimuth_deg"], required=True)
-    parser.add_argument(
-        "--model",
-        choices=["rnn", "gru", "lstm", "transformer", "itransformer", "qwen_lstm", "qwen_itransformer"],
-        required=True,
-    )
+    parser.add_argument("--model", choices=["qwen_lstm"], default="qwen_lstm")
     parser.add_argument("--data-variant", choices=["depth1ft_clean", "depth1ft", "common"], default="depth1ft_clean")
     parser.add_argument("--numeric-path", default=None)
     parser.add_argument("--feature-mode", choices=["all", "no_depth", "no_angle_derived", "no_target_history"], default="all")
