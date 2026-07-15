@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated article."
+title: "Qwen-LSTM Drilling Trajectory Prediction"
+type: software
+authors:
+  - family-names: Jiang
+    given-names: Zhongyi
+year-released: 2026
+license: MIT
+repository-code: "https://github.com/yanxiaoxiang123/Qwen-LSTM-Drilling-Trajectory"
+
