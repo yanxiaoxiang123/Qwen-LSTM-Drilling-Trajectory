@@ -47,7 +47,12 @@ The files under `examples/data/` are synthetic and deidentified. They preserve t
 
 ## Full data preparation
 
-The numerical experiments use the public Utah FORGE 16A(78)-32 and 16B(78)-32 drilling records. Prepare the following layout:
+The numerical experiments use the public Utah FORGE 16A(78)-32 and 16B(78)-32 drilling records. Download links, exact resources, DOI citations, and preparation notes are provided in [DATA.md](DATA.md):
+
+- 16A(78)-32: https://doi.org/10.15121/1776602
+- 16B(78)-32: https://doi.org/10.15121/1998591
+
+Prepare the following layout:
 
 ```text
 data_cleaned_csv/
